@@ -1,20 +1,21 @@
-# Add GoogleTest.
-add_subdirectory(googletest)
+cmake_minimum_required(VERSION 3.16)
 
-# Add test executable.
-add_executable(tests
+find_package(Catch2 REQUIRED)
+
+add_executable(ceist-gpt-test
     ceist-gpt-test.cpp
 )
 
-# Link with CeistGpt library and GoogleTest.
-target_link_libraries(tests PRIVATE
+target_link_libraries(ceist-gpt-test PRIVATE
     ceist-gpt
-    gtest
-    gtest_main
+    ${CONAN_LIBS}
+    ${OPENSSL_LIBRARIES}
+    ${Boost_LIBRARIES}
+    curl
+    Catch2::Catch2
 )
 
-# Add tests to CTest.
-add_test(
-    NAME CeistGptTest
-    COMMAND tests
-)
+include(CTest)
+include(Catch)
+catch_discover_tests(ceist-gpt-test)
+
