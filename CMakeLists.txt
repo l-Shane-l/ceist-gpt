@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 # Dependencies
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
-
+find_package(Catch2 REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(Boost COMPONENTS program_options REQUIRED)
 
