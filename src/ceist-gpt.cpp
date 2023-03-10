@@ -3,6 +3,23 @@
 #include <cstring>
 #include <iostream>
 #include <sstream>
+#include <nlohmann/json.hpp>
+
+
+int main() {
+    std::string api_key = "your_api_key_here";
+    ceist_gpt::CeistGPT gpt(api_key);
+
+    std::string prompt = "Write a short story";
+    std::vector<std::string> additional_context = {"It was a dark and stormy night..."};
+    int max_tokens = 50;
+    double temperature = 0.7;
+
+    std::string response_text = gpt.query(prompt, additional_context, max_tokens, temperature);
+    std::cout << "Response text: " << response_text << std::endl;
+
+    return 0;
+}
 
 namespace ceist_gpt {
 

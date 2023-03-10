@@ -1,42 +1,24 @@
-cmake_minimum_required(VERSION 3.16)
-project(ceist-gbt VERSION 1.0.0)
+cmake_minimum_required(VERSION 3.5)
 
-set(CMAKE_CXX_STANDARD 20)
+# Set project name
+project(ceist-gpt)
 
-# Dependencies
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
-find_package(Catch2 REQUIRED)
+# Find required libraries
+find_package(Boost 1.74.0 REQUIRED COMPONENTS program_options)
 find_package(OpenSSL REQUIRED)
-find_package(Boost COMPONENTS program_options REQUIRED)
+find_package(CURL REQUIRED)
 
-# Library
-add_library(ceist-gbt
-  src/ceist-gbt.cpp
-  include/ceist-gbt.hpp
-)
+# Include directories
+include_directories(${Boost_INCLUDE_DIRS} ${OPENSSL_INCLUDE_DIR} ${CURL_INCLUDE_DIRS} "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
-target_include_directories(ceist-gbt PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-)
+# Add source files
+file(GLOB SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
-target_link_libraries(ceist-gbt PRIVATE
-  ${CONAN_LIBS}
-  ${OPENSSL_LIBRARIES}
-  ${Boost_LIBRARIES}
-  curl
-)
+# Create library
+add_library(ceist-gpt ${SOURCES})
 
-# Executable
-add_executable(ceist-gbt-cli
-  src/main.cpp
-)
+# Create executable
+add_executable(ceist-gpt-app "${CMAKE_CURRENT_SOURCE_DIR}/src/ceist-gpt.cpp")
 
-target_link_libraries(ceist-gbt-cli PRIVATE
-  ceist-gbt
-)
-
-# Testing
-enable_testing()
-add_subdirectory(test)
+# Link libraries
+target_link_libraries(ceist-gpt-app ceist-gpt Boost::program_options ${OPENSSL_LIBRARIES} ${CURL_LIBRARIES})

@@ -4,7 +4,7 @@
 #include <vector>
 #include <curl/curl.h>
 
-namespace ceist_gbt {
+namespace ceist_gpt {
 
 class CeistGPT {
 public:
@@ -20,4 +20,4 @@ private:
     static size_t curl_write_callback(void* contents, size_t size, size_t nmemb, void* userp);
 };
 
-} // namespace ceist_gbt
+} // namespace ceist_gpt

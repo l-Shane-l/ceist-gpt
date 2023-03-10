@@ -8,9 +8,10 @@
 
 [requires]
     boost/1.Y.Z
-    catch2/2.Y.Z
-    libcurl/7.Y.Z
+    bzip2/1.Y.Z
+    libbacktrace/cci.20210118
     openssl/1.Y.Z
+    zlib/1.Y.Z
 
 [options]
 
@@ -28,9 +29,7 @@
 [full_requires]
     boost/1.77.0:dc8aedd23a0f0a773a5fcdcfe1ae3e89c4205978
     bzip2/1.0.8:c32092bf4d4bb47cf962af898e02823f499b017e
-    catch2/2.13.7:5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9
     libbacktrace/cci.20210118:dfbe50feef7f3c6223a476cd5aeadb687084a646
-    libcurl/7.87.0:aad9c5b4e3219a071c23322be53a09e3621c5a07
     openssl/1.1.1k:dfbe50feef7f3c6223a476cd5aeadb687084a646
     zlib/1.2.13:dfbe50feef7f3c6223a476cd5aeadb687084a646
 
@@ -103,53 +102,8 @@
     bzip2:build_executable=True
     bzip2:fPIC=True
     bzip2:shared=False
-    catch2:default_reporter=None
-    catch2:with_main=False
-    catch2:with_prefix=False
     libbacktrace:fPIC=True
     libbacktrace:shared=False
-    libcurl:fPIC=True
-    libcurl:shared=False
-    libcurl:with_brotli=False
-    libcurl:with_c_ares=False
-    libcurl:with_ca_bundle=auto
-    libcurl:with_ca_path=auto
-    libcurl:with_cookies=True
-    libcurl:with_crypto_auth=True
-    libcurl:with_dict=True
-    libcurl:with_docs=False
-    libcurl:with_file=True
-    libcurl:with_ftp=True
-    libcurl:with_gopher=True
-    libcurl:with_http=True
-    libcurl:with_imap=True
-    libcurl:with_ipv6=True
-    libcurl:with_largemaxwritesize=False
-    libcurl:with_ldap=False
-    libcurl:with_libgsasl=False
-    libcurl:with_libidn=False
-    libcurl:with_libpsl=False
-    libcurl:with_librtmp=False
-    libcurl:with_libssh2=False
-    libcurl:with_mqtt=True
-    libcurl:with_nghttp2=False
-    libcurl:with_ntlm=True
-    libcurl:with_ntlm_wb=True
-    libcurl:with_pop3=True
-    libcurl:with_proxy=True
-    libcurl:with_rtsp=True
-    libcurl:with_smb=True
-    libcurl:with_smtp=True
-    libcurl:with_ssl=openssl
-    libcurl:with_symbol_hiding=False
-    libcurl:with_telnet=True
-    libcurl:with_tftp=True
-    libcurl:with_threaded_resolver=True
-    libcurl:with_unix_sockets=True
-    libcurl:with_verbose_debug=True
-    libcurl:with_verbose_strings=True
-    libcurl:with_zlib=True
-    libcurl:with_zstd=False
     openssl:386=False
     openssl:enable_weak_ssl_ciphers=False
     openssl:fPIC=True

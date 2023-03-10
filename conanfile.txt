@@ -1,8 +1,11 @@
 [requires]
 boost/1.77.0
-curl/7.78.0
+bzip2/1.0.8
+libbacktrace/cci.20210118
+
 openssl/1.1.1k
-catch2/2.13.7
+zlib/1.2.13
 
 [generators]
 cmake
+cmake_find_package

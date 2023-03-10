@@ -1,5 +1,0 @@
-if(EXISTS "/home/shane/ceist-gpt/build/test/ceist-gpt-test_tests-b12d07c.cmake")
-  include("/home/shane/ceist-gpt/build/test/ceist-gpt-test_tests-b12d07c.cmake")
-else()
-  add_test(ceist-gpt-test_NOT_BUILT-b12d07c ceist-gpt-test_NOT_BUILT-b12d07c)
-endif()

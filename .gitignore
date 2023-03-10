@@ -1,0 +1,50 @@
+# Ignore build directory
+/build
+
+# Ignore CMake generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+CTestTestfile.cmake
+
+# Ignore Visual Studio generated files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.vcproj
+*.vcproj.user
+*.suo
+*.pdb
+*.ilk
+*.idb
+
+# Ignore Xcode generated files
+*.xcodeproj
+*.xcworkspace
+*.xcuserdatad
+
+# Ignore Eclipse generated files
+.settings/
+.project
+.cproject
+
+# Ignore other build system generated files
+Makefile*
+*.make
+*.mk
+*.mak
+*.d
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.log
+*.mod
+*.mod.o
