@@ -1,25 +1,9 @@
-#include "ceist-gpt.hpp"
+#include "../include/ceist-gpt.hpp"
 
 #include <cstring>
 #include <iostream>
 #include <sstream>
-#include <nlohmann/json.hpp>
-
-
-int main() {
-    std::string api_key = "your_api_key_here";
-    ceist_gpt::CeistGPT gpt(api_key);
-
-    std::string prompt = "Write a short story";
-    std::vector<std::string> additional_context = {"It was a dark and stormy night..."};
-    int max_tokens = 50;
-    double temperature = 0.7;
-
-    std::string response_text = gpt.query(prompt, additional_context, max_tokens, temperature);
-    std::cout << "Response text: " << response_text << std::endl;
-
-    return 0;
-}
+#include <fstream>
 
 namespace ceist_gpt {
 
@@ -44,7 +28,7 @@ CeistGPT::~CeistGPT() {
 std::string CeistGPT::query(const std::string& prompt, const std::vector<std::string>& additional_context, int max_tokens, double temperature) {
     // Construct the API endpoint URL.
     std::stringstream url_stream;
-    url_stream << "https://api.openai.com/v1/" << "engines/davinci-codex/completions";
+    url_stream << "https://api.openai.com/v1/" << "engines/text-davinci-002/completions";
     std::string url = url_stream.str();
 
     // Construct the request headers.
@@ -53,37 +37,27 @@ std::string CeistGPT::query(const std::string& prompt, const std::vector<std::st
     headers = curl_slist_append(headers, "Content-Type: application/json");
 
     // Construct the request body.
-    std::stringstream request_body_stream;
-    request_body_stream << "{\n"
-                        << "  \"prompt\": \"" << prompt << "\",\n"
-                        << "  \"max_tokens\": " << max_tokens << ",\n"
-                        << "  \"temperature\": " << temperature << ",\n"
-                        << "  \"n\": 1,\n"
-                        << "  \"stop\": \"\\n\",\n"
-                        << "  \"stream\": false,\n"
-                        << "  \"logprobs\": null,\n"
-                        << "  \"echo\": true,\n"
-                        << "  \"presence_penalty\": 0,\n"
-                        << "  \"frequency_penalty\": 0,\n"
-                        << "  \"best_of\": 1,\n"
-                        << "  \"model\": \"davinci-codex\"\n";
-    if (!additional_context.empty()) {
-        request_body_stream << "  \"prompt\": [";
-        for (size_t i = 0; i < additional_context.size(); ++i) {
-            request_body_stream << "\"" << additional_context[i] << "\"";
-            if (i < additional_context.size() - 1) {
-                request_body_stream << ",";
-            }
-        }
-        request_body_stream << "]\n";
-    }
-    request_body_stream << "}\n";
-    std::string request_body = request_body_stream.str();
+    nlohmann::json request_body;
+    request_body["prompt"] = prompt;
+    request_body["max_tokens"] = max_tokens;
+    request_body["temperature"] = temperature;
+    request_body["n"] = 1;
+    request_body["stop"] = "";
+    request_body["stream"] = false;
+    request_body["logprobs"] = nullptr;
+    request_body["echo"] = true;
+    request_body["presence_penalty"] = 0;
+    request_body["frequency_penalty"] = 0;
+    request_body["best_of"] = 1;
+
+    std::string request_body_string = request_body.dump();
+
+    std::cout << "Request body: " << request_body_string << std::endl;
 
     // Set up the curl request.
     curl_easy_setopt(curl_handle_, CURLOPT_URL, url.c_str());
-    curl_easy_setopt(curl_handle_, CURLOPT_POSTFIELDS, request_body.c_str());
-    curl_easy_setopt(curl_handle_, CURLOPT_POSTFIELDSIZE, request_body.length());
+    curl_easy_setopt(curl_handle_, CURLOPT_POSTFIELDS, request_body_string.c_str());
+    curl_easy_setopt(curl_handle_, CURLOPT_POSTFIELDSIZE, request_body_string.length());
     curl_easy_setopt(curl_handle_, CURLOPT_HTTPHEADER, headers);
     curl_easy_setopt(curl_handle_, CURLOPT_WRITEFUNCTION, curl_write_callback);
 
@@ -109,11 +83,10 @@ std::string CeistGPT::query(const std::string& prompt, const std::vector<std::st
     // Extract and return the response text.
     try {
         std::string text = response["choices"][0]["text"];
+
         return text;
     } catch (const std::exception& e) {
         throw std::runtime_error("Failed to extract response text from API response: " + std::string(e.what()));
     }
 }
-
-}  // namespace ceist_gpt
-
+}

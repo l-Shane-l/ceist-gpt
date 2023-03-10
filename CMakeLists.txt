@@ -18,7 +18,7 @@ file(GLOB SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 add_library(ceist-gpt ${SOURCES})
 
 # Create executable
-add_executable(ceist-gpt-app "${CMAKE_CURRENT_SOURCE_DIR}/src/ceist-gpt.cpp")
+add_executable(ceist-gpt-app "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
 
 # Link libraries
 target_link_libraries(ceist-gpt-app ceist-gpt Boost::program_options ${OPENSSL_LIBRARIES} ${CURL_LIBRARIES})
