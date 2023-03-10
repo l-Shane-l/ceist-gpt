@@ -40,14 +40,4 @@ $ ./ceist-gbt-cli --api-key=YOUR_API_KEY --prompt="Hello, World!"
  - [ ] Add support for Include-what-you-use
  - [ ] Add support for code coverage
  - [ ] Add more APIs to the library
- - [ ] Implement more functions in CeistGpt to support additional API endpoints.
- - [ ] Improve error handling and error reporting in the CeistGpt library.
- - [ ] Implement more test cases for the CeistGpt library, and add code coverage reporting to the build system.
- - [ ] Add support for building the ceist-gpt-cli binary on Windows platforms.
- - [ ] Add support for building the library and binary with different optimization levels (e.g., -O2, -O3, etc.) using CMake.
- - [ ] Add support for building the library and binary with different compiler flags (e.g., -Wall, -Wextra, etc.) using CMake.
- - [ ] Implement logging using a logging library like spdlog or Boost.Log.
- - [ ] Add support for configuring the API endpoint URL using a command-line option or environment variable.
- - [ ] Implement caching of API responses to improve performance.
- - [ ] Implement retries for failed API requests to improve reliability.
 
