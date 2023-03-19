@@ -10,18 +10,19 @@
 namespace ceist_gpt {
 
 class CeistGPT {
-   public:
+public:
     explicit CeistGPT(const std::string& api_key);
     ~CeistGPT();
     std::string query(const std::string& prompt, const std::vector<std::string>& additional_context, int max_tokens, double temperature);
 
-   private:
+private:
     static size_t curl_write_callback(void* contents, size_t size, size_t nmemb, void* userp);
 
     CURL* curl_handle_;
     std::string api_key_;
 };
 
-}
+} // namespace ceist_gpt
 
 #endif  // CEIST_GPT_HPP
+
