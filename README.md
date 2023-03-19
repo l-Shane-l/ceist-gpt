@@ -40,14 +40,12 @@ To use the Ceist-gbt command-line tool, you can run the ceist-gbt-cli executable
 $ ./ceist-gbt-cli --api-key=YOUR_API_KEY --prompt="Hello, World!"
 ```
 ## TODO
- - [ ] Add support for Clang-tidy
- - [ ] Add support for Valgrind
- - [ ] Add support for Cpplint
- - [ ] Add support for Cppcheck
- - [ ] Add support for Include-what-you-use
- - [ ] Add support for code coverage
- - [ ] Add more APIs to the library
-hed to 
+- [ ] Add text to speech in main.cpp
+- [ ] Add Whisper AI api to library
+- [ ] Add speech to text in main.cpp
+- [ ] Add support in cmake to compile to Android and IOS cpu's
+- [ ] Add github actions to test then compile code for linux, android and ios
+- [ ] Investigate adding support for windows and maybe switching to vcpkg from conan
 ## Dependencies
  - libcurl
 
@@ -72,6 +70,7 @@ git clone https://github.com/l-Shane-l/ceist-gpt.git
 4. Build the project:
 
 ```
+use the scripts in script in scripts folder to install the json lib
 mkdir build
 cd build
 conan install ..
