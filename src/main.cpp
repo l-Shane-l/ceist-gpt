@@ -37,8 +37,7 @@ int main() {
     // Initialize GPT object.
     ceist_gpt::CeistGPT gpt(api_key);
 
-    std::string conversation_state;
-    std::vector<std::string> additional_context = {};
+    std::string conversation_history;
     while (true) {
         // Prompt the user for a question.
         console->info("Enter a prompt (or \"quit\" to exit): ");
@@ -49,24 +48,18 @@ int main() {
         }
 
         // Generate response text from GPT.
-        if(conversation_state.length() > 0){
-        std::cout << conversation_state << std::endl;
-        additional_context.push_back(conversation_state);
-    }
         int max_tokens = 400;
         double temperature = 1;
         try {
-            std::string response_json = gpt.query(prompt, additional_context, max_tokens, temperature);
+            std::string response_json = gpt.query(prompt, conversation_history, max_tokens, temperature);
             nlohmann::json response = nlohmann::json::parse(response_json);
             std::string response_text = response["choices"][0]["text"].get<std::string>();
             response_text.erase(0, response_text.find_first_not_of("\n"));
             response_text.erase(response_text.find_last_not_of("\n") + 1);
-            auto conversation_state_ptr = response["context"].find("text");
-            if (conversation_state_ptr != response["context"].end()) {
-                conversation_state = *conversation_state_ptr;
-                conversation_state.erase(0, conversation_state.find_first_not_of("\n"));
-                conversation_state.erase(conversation_state.find_last_not_of("\n") + 1);
-            }
+
+            // Update the conversation_history with the user input and the model's response.
+            conversation_history += "\nUser: " + prompt + "\nAssistant: " + response_text;
+
             console->info("Response text: {}", response_text);
         } catch (const std::exception& e) {
             console->error("Failed to generate response: {}", e.what());
