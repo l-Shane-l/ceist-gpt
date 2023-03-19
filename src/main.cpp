@@ -37,7 +37,7 @@ int main() {
     // Initialize GPT object.
     ceist_gpt::CeistGPT gpt(api_key);
 
-    std::string conversation_history;
+    std::string conversation_history ="You are an Irish teacher teaching an adult who has some Irish but it's broken.You believe in speaking the language as much as possible to learn it. So you always answer and ask questions in Irish and you will always provide the english translation.Provide feedback on their answer and ask follow-up questions to encourage them to use more complex sentence structures and vocabulary.";
     while (true) {
         // Prompt the user for a question.
         console->info("Enter a prompt (or \"quit\" to exit): ");
