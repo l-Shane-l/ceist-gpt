@@ -146,6 +146,9 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 //Path to a program.
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
+//No help, variable specified on the command line.
+CMAKE_PREFIX_PATH:UNINITIALIZED=/home/shane/speechsdk
+
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
 
@@ -228,6 +231,9 @@ CURL_LIBRARY_DEBUG:FILEPATH=CURL_LIBRARY_DEBUG-NOTFOUND
 
 //Path to a library.
 CURL_LIBRARY_RELEASE:FILEPATH=/usr/lib/x86_64-linux-gnu/libcurl.so
+
+//The directory containing a CMake configuration file for Microsoft.CognitiveServices.Speech.
+Microsoft.CognitiveServices.Speech_DIR:PATH=Microsoft.CognitiveServices.Speech_DIR-NOTFOUND
 
 //Path to a library.
 OPENSSL_CRYPTO_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libcrypto.so

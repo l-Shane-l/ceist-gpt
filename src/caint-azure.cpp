@@ -1,53 +1,45 @@
-#include <curl/curl.h>
-#include <fstream>
+// ceist-speech.cpp
+
 #include "caint-azure.hpp"
+#include <iostream>
+#include <fstream>
+#include <speechapi_cxx.h>
+#include <speechapi_c.h>
+#include <speechapi_cxx.h>
+#include <speechapi_cxx_speech_synthesizer.h>
+#include <speechapi_cxx_speech_config.h>
+#include <speechapi_cxx_common.h>
+#include <speechapi_cxx_speech_synthesis_result.h>
+#include <speechapi_cxx_speech_synthesis_eventargs.h>
 
+namespace ceist_speech {
 
-size_t write_data(void* contents, size_t size, size_t nmemb, void* userp) {
-    ((std::string*)userp)->append((char*)contents, size * nmemb);
-    return size * nmemb;
-}
+bool synthesize_text(const std::string& api_key, const std::string& region, const std::string& text, const std::string& voice, const std::string& output_file) {
+    using namespace Microsoft::CognitiveServices::Speech;
 
-bool synthesize_speech(const std::string &api_key, const std::string &region, const std::string &text, const std::string &voice, const std::string &output_file) {
-    CURL* curl;
-    CURLcode res;
-    std::string readBuffer;
+    // Create a speech configuration object with the provided API key and region
+    auto config = SpeechConfig::FromSubscription(api_key, region);
 
-    curl_global_init(CURL_GLOBAL_DEFAULT);
-    curl = curl_easy_init();
-    
-    if (curl) {
-        std::string url = "https://" + region + ".tts.speech.microsoft.com/cognitiveservices/v1";
-        std::string ssml = "<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-US'><voice name='" + voice + "'>" + text + "</voice></speak>";
-        struct curl_slist* headers = NULL;
+    // Create a speech synthesizer object with the given configuration
+    auto synthesizer = SpeechSynthesizer::FromConfig(config);
 
-        headers = curl_slist_append(headers, "Content-Type: application/ssml+xml");
-        headers = curl_slist_append(headers, "X-Microsoft-OutputFormat: audio-16khz-128kbitrate-mono-mp3");
-        headers = curl_slist_append(headers, ("Authorization: Bearer " + api_key).c_str());
+    // Set the synthesis options, including the voice
+    auto options = SpeechSynthesisOptions::FromLanguage(voice);
+    synthesizer->SetSpeechSynthesisVoiceName(voice);
 
-        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-        curl_easy_setopt(curl, CURLOPT_POST, 1L);
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, ssml.c_str());
-        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-
-        res = curl_easy_perform(curl);
-
-        if (res != CURLE_OK) {
-            fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
-            return false;
-        }
-
-        curl_easy_cleanup(curl);
-        curl_slist_free_all(headers);
+    // Synthesize the given text and write the audio output to the given file
+    auto result = synthesizer->SpeakText(text);
+    if (result->Reason == ResultReason::SynthesizingAudioCompleted) {
+        auto audio_data = result->AudioData();
+        output_file.open(output_file, std::ios::binary);
+        output_file.write(reinterpret_cast<const char*>(audio_data.data()), audio_data.size());
+        output_file.close();
+        return true;
+    } else {
+        std::cerr << "Speech synthesis failed: " << static_cast<int>(result->Reason) << std::endl;
+        return false;
     }
-
-    curl_global_cleanup();
-
-    std::ofstream output(output_file, std::ios::binary);
-    output.write(readBuffer.data(), readBuffer.size());
-    output.close();
-    return true;
 }
+
+} // namespace ceist_speech
 
