@@ -269,6 +269,9 @@ ceist-gpt_SOURCE_DIR:STATIC=/home/shane/ceist-gpt
 fmt_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/fmt
 
 //Path to a library.
+pkgcfg_lib_LIBAO_ao:FILEPATH=/usr/lib/x86_64-linux-gnu/libao.so
+
+//Path to a library.
 pkgcfg_lib_PC_CURL_curl:FILEPATH=/usr/lib/x86_64-linux-gnu/libcurl.so
 
 //Path to a library.
@@ -448,8 +451,45 @@ FIND_PACKAGE_MESSAGE_DETAILS_Boost:INTERNAL=[/usr/lib/x86_64-linux-gnu/cmake/Boo
 FIND_PACKAGE_MESSAGE_DETAILS_CURL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libcurl.so][/usr/include/x86_64-linux-gnu][c ][v7.81.0()]
 //Details about finding OpenSSL
 FIND_PACKAGE_MESSAGE_DETAILS_OpenSSL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libcrypto.so][/usr/include][c ][v3.0.2()]
+//Details about finding PkgConfig
+FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.29.2()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
+LIBAO_CFLAGS:INTERNAL=
+LIBAO_CFLAGS_I:INTERNAL=
+LIBAO_CFLAGS_OTHER:INTERNAL=
+LIBAO_FOUND:INTERNAL=1
+LIBAO_INCLUDEDIR:INTERNAL=/usr/include
+LIBAO_INCLUDE_DIRS:INTERNAL=
+LIBAO_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lao
+LIBAO_LDFLAGS_OTHER:INTERNAL=
+LIBAO_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+LIBAO_LIBRARIES:INTERNAL=ao
+LIBAO_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+LIBAO_LIBS:INTERNAL=
+LIBAO_LIBS_L:INTERNAL=
+LIBAO_LIBS_OTHER:INTERNAL=
+LIBAO_LIBS_PATHS:INTERNAL=
+LIBAO_MODULE_NAME:INTERNAL=ao
+LIBAO_PREFIX:INTERNAL=/usr
+LIBAO_STATIC_CFLAGS:INTERNAL=
+LIBAO_STATIC_CFLAGS_I:INTERNAL=
+LIBAO_STATIC_CFLAGS_OTHER:INTERNAL=
+LIBAO_STATIC_INCLUDE_DIRS:INTERNAL=
+LIBAO_STATIC_LDFLAGS:INTERNAL=-L/usr/lib/x86_64-linux-gnu;-lao;-lpthread
+LIBAO_STATIC_LDFLAGS_OTHER:INTERNAL=
+LIBAO_STATIC_LIBDIR:INTERNAL=
+LIBAO_STATIC_LIBRARIES:INTERNAL=ao;pthread
+LIBAO_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib/x86_64-linux-gnu
+LIBAO_STATIC_LIBS:INTERNAL=
+LIBAO_STATIC_LIBS_L:INTERNAL=
+LIBAO_STATIC_LIBS_OTHER:INTERNAL=
+LIBAO_STATIC_LIBS_PATHS:INTERNAL=
+LIBAO_VERSION:INTERNAL=1.2.2
+LIBAO_ao_INCLUDEDIR:INTERNAL=
+LIBAO_ao_LIBDIR:INTERNAL=
+LIBAO_ao_PREFIX:INTERNAL=
+LIBAO_ao_VERSION:INTERNAL=
 //ADVANCED property for variable: OPENSSL_CRYPTO_LIBRARY
 OPENSSL_CRYPTO_LIBRARY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: OPENSSL_INCLUDE_DIR
@@ -530,19 +570,23 @@ _OPENSSL_openssl_INCLUDEDIR:INTERNAL=
 _OPENSSL_openssl_LIBDIR:INTERNAL=
 _OPENSSL_openssl_PREFIX:INTERNAL=
 _OPENSSL_openssl_VERSION:INTERNAL=
+__pkg_config_arguments_LIBAO:INTERNAL=REQUIRED;ao
 __pkg_config_arguments_PC_CURL:INTERNAL=QUIET;libcurl
 __pkg_config_arguments__OPENSSL:INTERNAL=QUIET;openssl
+__pkg_config_checked_LIBAO:INTERNAL=1
 __pkg_config_checked_PC_CURL:INTERNAL=1
 __pkg_config_checked__OPENSSL:INTERNAL=1
 //ADVANCED property for variable: boost_headers_DIR
 boost_headers_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_program_options_DIR
 boost_program_options_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_LIBAO_ao
+pkgcfg_lib_LIBAO_ao-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PC_CURL_curl
 pkgcfg_lib_PC_CURL_curl-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib__OPENSSL_crypto
 pkgcfg_lib__OPENSSL_crypto-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib__OPENSSL_ssl
 pkgcfg_lib__OPENSSL_ssl-ADVANCED:INTERNAL=1
-prefix_result:INTERNAL=AsynchDNS;GSS-API;HSTS;HTTP2;HTTPS-proxy;IDN;IPv6;Kerberos;Largefile;NTLM;NTLM_WB;PSL;SPNEGO;SSL;TLS-SRP;UnixSockets;alt-svc;brotli;libz;zstd
+prefix_result:INTERNAL=/usr/lib/x86_64-linux-gnu
 

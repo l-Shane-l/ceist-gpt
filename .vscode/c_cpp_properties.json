@@ -10,13 +10,14 @@
                 "/usr/include/c++/11",
                 "/home/shane/anaconda3/bin/",
                 "/usr/include/x86_64-linux-gnu/c++/11",
-                "${workspaceFolder}/include/**"
+                "${workspaceFolder}/include/*"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",
             "cStandard": "gnu17",
             "cppStandard": "gnu++20",
-            "intelliSenseMode": "linux-gcc-x64"
+            "intelliSenseMode": "linux-gcc-x64",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
         }
     ],
     "version": 4
